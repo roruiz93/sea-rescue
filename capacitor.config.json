@@ -1,0 +1,27 @@
+{
+  "appId":   "com.searescue.game",
+  "appName": "Sea Rescue",
+  "webDir":  "dist",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": false
+  },
+  "plugins": {
+    "AdMob": {
+      "appId": "ca-app-pub-6295806554028984~8878121818"
+    },
+    "SplashScreen": {
+      "launchShowDuration":    2000,
+      "launchAutoHide":        true,
+      "backgroundColor":       "#0a2040",
+      "androidSplashResourceName": "splash",
+      "showSpinner":           false
+    },
+    "StatusBar": {
+      "style": "Dark",
+      "backgroundColor": "#0a2040"
+    }
+  }
+}
