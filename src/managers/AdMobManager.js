@@ -19,9 +19,11 @@ const AD_UNITS = {
 const BannerAdSize     = { ADAPTIVE_BANNER: 'ADAPTIVE_BANNER' };
 const BannerAdPosition = { BOTTOM_CENTER: 'BOTTOM_CENTER' };
 
-let initialized       = false;
-let interstitialReady = false;
-let rewardedReady     = false;
+let initialized        = false;
+let interstitialReady  = false;
+let rewardedReady      = false;
+let _interstitialTimer = null;
+let _rewardedTimer     = null;
 
 function getPlugin() {
   try {
@@ -95,7 +97,8 @@ export const AdMobManager = {
     try {
       await plugin.showInterstitial();
       interstitialReady = false;
-      setTimeout(() => this.prepareInterstitial(), 2000);
+      clearTimeout(_interstitialTimer);
+      _interstitialTimer = setTimeout(() => this.prepareInterstitial(), 2000);
       return true;
     } catch (e) {
       console.warn('[AdMob] Interstitial show error:', e);
@@ -128,7 +131,8 @@ export const AdMobManager = {
         });
         plugin.addListener('onRewardedVideoAdClosed', () => {
           rewardedReady = false;
-          setTimeout(() => this.prepareRewarded(), 2000);
+          clearTimeout(_rewardedTimer);
+          _rewardedTimer = setTimeout(() => this.prepareRewarded(), 2000);
           resolve(false);
         });
         await plugin.showRewardVideoAd();
